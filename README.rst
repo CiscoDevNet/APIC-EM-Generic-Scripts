@@ -30,24 +30,14 @@ consume fashion.
 Getting Started
 ===============
 
-Download
---------
-
-Clone this repository:
-
-.. code:: bash
-
-    git clone https://github.com/CiscoDevNet/uniq.git
-
 Install
 -------
 
-Then install the package locally.
+To install uniq, simply
 
 .. code:: bash
 
-    cd uniq
-    python setup.py install
+    pip install uniq
 
 Use
 ---
@@ -71,16 +61,6 @@ Import the package and make an API call.
     users = client.serialize(user_list_result)
 
     print(users)
-
-Running Tests
--------------
-
-The tests are located in the `tests <tests/>`__ directory. After
-installing the package, they can be run by executing the below command:
-
-::
-
-    python setup.py test
 
 Sample Scripts
 --------------
