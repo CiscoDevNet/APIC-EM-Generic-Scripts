@@ -72,5 +72,3 @@ Python
 ======
 
 This project has been tested and working on Python 3.0+
-
-
