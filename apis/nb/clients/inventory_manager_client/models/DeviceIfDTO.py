@@ -27,240 +27,240 @@ class DeviceIfDTO(object):
           attributeMap (dict): The key is attribute name and the value is json key in definition.
         """
         self.swaggerTypes = {
-
-            'className': 'str',
-
-
+            
             'description': 'str',
-
-
-            'interfaceType': 'str',
-
-
-            'duplex': 'str',
-
-
-            'status': 'str',
-
-
-            'vlanId': 'str',
-
-
-            'ifIndex': 'str',
-
-
-            'speed': 'str',
-
-
-            'macAddress': 'str',
-
-
+            
+            
+            'className': 'str',
+            
+            
             'deviceId': 'str',
-
-
+            
+            
+            'status': 'str',
+            
+            
+            'interfaceType': 'str',
+            
+            
+            'duplex': 'str',
+            
+            
             'portMode': 'str',
-
-
+            
+            
             'portType': 'str',
-
-
+            
+            
             'lastUpdated': 'str',
-
-
-            'pid': 'str',
-
-
-            'series': 'str',
-
-
+            
+            
+            'vlanId': 'str',
+            
+            
             'portName': 'str',
-
-
-            'mappedPhysicalInterfaceId': 'str',
-
-
-            'mappedPhysicalInterfaceName': 'str',
-
-
-            'nativeVlanId': 'str',
-
-
-            'ospfSupport': 'str',
-
-
-            'serialNo': 'str',
-
-
-            'ipv4Mask': 'str',
-
-
+            
+            
+            'series': 'str',
+            
+            
             'ipv4Address': 'str',
-
-
+            
+            
+            'ipv4Mask': 'str',
+            
+            
             'isisSupport': 'str',
-
-
+            
+            
+            'mappedPhysicalInterfaceId': 'str',
+            
+            
+            'mappedPhysicalInterfaceName': 'str',
+            
+            
+            'nativeVlanId': 'str',
+            
+            
+            'ospfSupport': 'str',
+            
+            
+            'pid': 'str',
+            
+            
+            'serialNo': 'str',
+            
+            
+            'ifIndex': 'str',
+            
+            
+            'macAddress': 'str',
+            
+            
+            'speed': 'str',
+            
+            
             'id': 'str',
-
-
+            
+            
             'instanceUuid': 'str'
-
+            
         }
 
         self.attributeMap = {
-
-            'className': 'className',
-
+            
             'description': 'description',
-
-            'interfaceType': 'interfaceType',
-
-            'duplex': 'duplex',
-
-            'status': 'status',
-
-            'vlanId': 'vlanId',
-
-            'ifIndex': 'ifIndex',
-
-            'speed': 'speed',
-
-            'macAddress': 'macAddress',
-
+            
+            'className': 'className',
+            
             'deviceId': 'deviceId',
-
+            
+            'status': 'status',
+            
+            'interfaceType': 'interfaceType',
+            
+            'duplex': 'duplex',
+            
             'portMode': 'portMode',
-
+            
             'portType': 'portType',
-
+            
             'lastUpdated': 'lastUpdated',
-
-            'pid': 'pid',
-
-            'series': 'series',
-
+            
+            'vlanId': 'vlanId',
+            
             'portName': 'portName',
-
-            'mappedPhysicalInterfaceId': 'mappedPhysicalInterfaceId',
-
-            'mappedPhysicalInterfaceName': 'mappedPhysicalInterfaceName',
-
-            'nativeVlanId': 'nativeVlanId',
-
-            'ospfSupport': 'ospfSupport',
-
-            'serialNo': 'serialNo',
-
-            'ipv4Mask': 'ipv4Mask',
-
+            
+            'series': 'series',
+            
             'ipv4Address': 'ipv4Address',
-
+            
+            'ipv4Mask': 'ipv4Mask',
+            
             'isisSupport': 'isisSupport',
-
+            
+            'mappedPhysicalInterfaceId': 'mappedPhysicalInterfaceId',
+            
+            'mappedPhysicalInterfaceName': 'mappedPhysicalInterfaceName',
+            
+            'nativeVlanId': 'nativeVlanId',
+            
+            'ospfSupport': 'ospfSupport',
+            
+            'pid': 'pid',
+            
+            'serialNo': 'serialNo',
+            
+            'ifIndex': 'ifIndex',
+            
+            'macAddress': 'macAddress',
+            
+            'speed': 'speed',
+            
             'id': 'id',
-
+            
             'instanceUuid': 'instanceUuid'
+            
+        }       
 
-        }
-
-
-
-        self.className = None # str
-
+        
         #interface description
-
+        
         self.description = None # str
-
-        #Interface type as Physical or Virtual
-
-        self.interfaceType = None # str
-
-        #Interface duplex as AutoNegotiate or FullDuplex
-
-        self.duplex = None # str
-
-        #Interface status as Down / Up
-
-        self.status = None # str
-
-        #Vlan ID of interface
-
-        self.vlanId = None # str
-
-        #Interface index
-
-        self.ifIndex = None # str
-
-        #Speed of the interface
-
-        self.speed = None # str
-
-        #MAC address of interface
-
-        self.macAddress = None # str
-
+        
+        
+        self.className = None # str
+        
         #ID of the device
-
+        
         self.deviceId = None # str
-
+        
+        #Interface status as Down / Up
+        
+        self.status = None # str
+        
+        #Interface type as Physical or Virtual
+        
+        self.interfaceType = None # str
+        
+        #Interface duplex as AutoNegotiate or FullDuplex
+        
+        self.duplex = None # str
+        
         #Port mode as access, trunk, routed
-
+        
         self.portMode = None # str
-
+        
         #Port type as Ethernet Port / Ethernet SVI / Ethernet Sub Interface
-
+        
         self.portType = None # str
-
+        
         #Time when the device interface info last got updated
-
+        
         self.lastUpdated = None # str
-
-        #Platform ID of the device
-
-        self.pid = None # str
-
-        #Series of the device
-
-        self.series = None # str
-
+        
+        #Vlan ID of interface
+        
+        self.vlanId = None # str
+        
         #Interface name
-
+        
         self.portName = None # str
-
-        #ID of physical interface mapped with the virtual interface of WLC
-
-        self.mappedPhysicalInterfaceId = None # str
-
-        #Physical interface name mapped with the virtual interface of WLC
-
-        self.mappedPhysicalInterfaceName = None # str
-
-        #Vlan to receive untagged frames on trunk port
-
-        self.nativeVlanId = None # str
-
-        #Flag for OSPF enabled / disabled
-
-        self.ospfSupport = None # str
-
-        #Serial number of the device
-
-        self.serialNo = None # str
-
-        #Subnet mask for IPv4 address assigned for interface
-
-        self.ipv4Mask = None # str
-
+        
+        #Series of the device
+        
+        self.series = None # str
+        
         #IPv4 address assigned for interface
-
+        
         self.ipv4Address = None # str
-
+        
+        #Subnet mask for IPv4 address assigned for interface
+        
+        self.ipv4Mask = None # str
+        
         #Flag for ISIS enabled / disabled
-
+        
         self.isisSupport = None # str
-
-
+        
+        #ID of physical interface mapped with the virtual interface of WLC
+        
+        self.mappedPhysicalInterfaceId = None # str
+        
+        #Physical interface name mapped with the virtual interface of WLC
+        
+        self.mappedPhysicalInterfaceName = None # str
+        
+        #Vlan to receive untagged frames on trunk port
+        
+        self.nativeVlanId = None # str
+        
+        #Flag for OSPF enabled / disabled
+        
+        self.ospfSupport = None # str
+        
+        #Platform ID of the device
+        
+        self.pid = None # str
+        
+        #Serial number of the device
+        
+        self.serialNo = None # str
+        
+        #Interface index
+        
+        self.ifIndex = None # str
+        
+        #MAC address of interface
+        
+        self.macAddress = None # str
+        
+        #Speed of the interface
+        
+        self.speed = None # str
+        
+        
         self.id = None # str
-
-
+        
+        
         self.instanceUuid = None # str
