@@ -1,22 +1,6 @@
-"""
-Copyright 2016 Cisco Systems
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-"""
-
 import inspect
 
-from uniq.apis.exceptions import UniqException
+from uniq.apis.nb.exceptions import NBApiClientException
 
 
 class ApiClient(object):
@@ -51,7 +35,10 @@ class ApiClient(object):
             name (str): name of attribute.
 
         Returns:
-            Wrapped api method(function) with additional argument api_verion.
+           function: Wrapped api method(function) with additional argument api_version.
+
+        Raises:
+            AttributeError: when attribute with given name is not found
         """
 
         if name in self.versioned_apis:
@@ -85,7 +72,7 @@ class ApiClient(object):
 
         if similar_api_map_list:
             for similar_api_map in similar_api_map_list:
-                for version_1, name_1 in similar_api_map.items():
+                for _, name_1 in similar_api_map.items():
                     for version_2, name_2 in similar_api_map.items():
                         if name_1 != name_2 and version_2 not in self.all_apis[name_1]:
                             self.all_apis[name_1][version_2] = self.all_apis[name_2][version_2]
@@ -94,13 +81,14 @@ class ApiClient(object):
             self.versioned_apis[api_name] = self._add_api_version_as_argument(version_function_map)
 
     def _add_api_version_as_argument(self, version_function_map):
-        """ Add api_version as an argument to all api method.
+        """ Add api_version as an argument to all api methods.
 
         Args:
             version_function_map (dict): key is version and value is function object.
 
         Returns:
-            wrapper function which will decide which api to be call according to the version.
+            function: wrapper function which will decide which api to be called according to
+                      the version.
         """
 
         def wrapper(*args, **kwargs):
@@ -116,13 +104,12 @@ class ApiClient(object):
                 if api_version in version_function_map:
                     return version_function_map[api_version](*args, **kwargs)
                 else:
-                    raise UniqException("endpoint '{}' doesn't support version '{}'"
-                                        .format(list(version_function_map.values())[0].__name__,
-                                                api_version))
+                    raise NBApiClientException(
+                        "endpoint '{}' doesn't support version '{}'"
+                        .format(list(version_function_map.values())[0].__name__, api_version))
 
             elif len(version_function_map) == 1:
                 return list(version_function_map.values())[0](*args, **kwargs)
             else:
                 return version_function_map[self.default_version](*args, **kwargs)
         return wrapper
-
