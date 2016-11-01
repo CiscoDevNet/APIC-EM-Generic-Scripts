@@ -1,12 +1,10 @@
-#!/usr/bin/env python
-#pylint: skip-file
 # This source code is licensed under the Apache license found in the
 # LICENSE file in the root directory of this project.
 
 
 import inspect
 
-from uniq.apis.exceptions import NBApiClientException
+from uniq.apis.exceptions import UniqException
 
 
 class ApiClient(object):
@@ -15,7 +13,6 @@ class ApiClient(object):
     def __init__(self, api_client, version_client_class_map, default_version,
                  similar_api_map_list=None):
         """ Initializer of ApiClient.
-
         Args:
             api_client (ClientManager): ClientManager instance.
             version_client_class_map (dict): key is version number, value is class of api client.
@@ -36,15 +33,10 @@ class ApiClient(object):
 
     def __getattr__(self, name):
         """ Get attribute based on name.
-
         Args:
             name (str): name of attribute.
-
         Returns:
-           function: Wrapped api method(function) with additional argument api_version.
-
-        Raises:
-            AttributeError: when attribute with given name is not found
+            Wrapped api method(function) with additional argument api_verion.
         """
 
         if name in self.versioned_apis:
@@ -53,11 +45,9 @@ class ApiClient(object):
 
     def _collect_apis(self, similar_api_map_list=None):
         """ Collect all apis and make them accessible by name and version.
-
         This method will collect all apis from clients of different versions, deal with apis
         with different name but same feature, and wrap all api methods so that we can choose
         different version api call with argument 'api_version'.
-
         Args:
             similar_api_map_list (dict): list of map of apis with different name but same feature.
                                          Example: [{'v1': 'get', 'v2': 'getById'}]
@@ -78,7 +68,7 @@ class ApiClient(object):
 
         if similar_api_map_list:
             for similar_api_map in similar_api_map_list:
-                for _, name_1 in similar_api_map.items():
+                for version_1, name_1 in similar_api_map.items():
                     for version_2, name_2 in similar_api_map.items():
                         if name_1 != name_2 and version_2 not in self.all_apis[name_1]:
                             self.all_apis[name_1][version_2] = self.all_apis[name_2][version_2]
@@ -87,19 +77,15 @@ class ApiClient(object):
             self.versioned_apis[api_name] = self._add_api_version_as_argument(version_function_map)
 
     def _add_api_version_as_argument(self, version_function_map):
-        """ Add api_version as an argument to all api methods.
-
+        """ Add api_version as an argument to all api method.
         Args:
             version_function_map (dict): key is version and value is function object.
-
         Returns:
-            function: wrapper function which will decide which api to be called according to
-                      the version.
+            wrapper function which will decide which api to be call according to the version.
         """
 
         def wrapper(*args, **kwargs):
             """ Wrapper function.
-
                 If api_version is set, return corresponding method.
                 If not, and if there is only one method, return that method.
                 if there are more than one method, return the default version one.
@@ -110,9 +96,9 @@ class ApiClient(object):
                 if api_version in version_function_map:
                     return version_function_map[api_version](*args, **kwargs)
                 else:
-                    raise NBApiClientException(
-                        "endpoint '{}' doesn't support version '{}'"
-                        .format(list(version_function_map.values())[0].__name__, api_version))
+                    raise UniqException("endpoint '{}' doesn't support version '{}'"
+                                        .format(list(version_function_map.values())[0].__name__,
+                                                api_version))
 
             elif len(version_function_map) == 1:
                 return list(version_function_map.values())[0](*args, **kwargs)
